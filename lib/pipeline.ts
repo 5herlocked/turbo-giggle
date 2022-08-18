@@ -14,7 +14,7 @@ export default class PipelineConstruct extends Construct {
             .account(account)
             .region(region)
             .addOns()
-            .teams(new TeamPlatform(account), new TeamApplication('burnham', account));
+            .teams(new TeamPlatform(account), new TeamApplication('sherlock', account));
             
         blueprints.CodePipelineStack.builder()
             .name('eks-blueprints-workshop-pipeline')
