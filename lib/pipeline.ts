@@ -31,6 +31,6 @@ export default class PipelineConstruct extends Construct {
                     { id: 'prod', stackBuilder: blueprint.clone('us-east-1')}
                 ]
             })
-            .build(scope, id+'stack', props);
+            .build(scope, id+'-stack', props);
     }
 }
