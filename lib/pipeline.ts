@@ -29,20 +29,6 @@ export default class PipelineConstruct extends Construct {
             path: 'envs/dev'
         },
         });
-        
-        const testBootstrapArgo = new blueprints.ArgoCDAddOn({
-            bootstrapRepo: {
-                ...bootstrapRepo,
-                path: 'envs/test'
-            },
-        });
-    
-        const prodBootstrapArgo = new blueprints.ArgoCDAddOn({
-            bootstrapRepo: {
-                ...bootstrapRepo,
-                path: 'envs/prod'
-            }
-        });
             
         blueprints.CodePipelineStack.builder()
             .name('eks-blueprints-workshop-pipeline')
@@ -55,9 +41,7 @@ export default class PipelineConstruct extends Construct {
             .wave({
                 id: "envs",
                 stages: [
-                    { id: 'dev', stackBuilder: blueprint.clone('us-west-2').addOns(devBootstrapArgo) },
-                    { id: 'test', stackBuilder: blueprint.clone('us-east-2').addOns(testBootstrapArgo) },
-                    { id: 'prod', stackBuilder: blueprint.clone('us-east-1').addOns(prodBootstrapArgo) }
+                    { id: 'dev', stackBuilder: blueprint.clone('us-east-1').addOns(devBootstrapArgo) },
                 ]
             })
             .build(scope, id+'-stack', props);
