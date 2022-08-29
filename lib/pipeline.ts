@@ -15,11 +15,11 @@ export default class PipelineConstruct extends Construct {
             .addOns(new blueprints.ClusterAutoScalerAddOn)
             .teams();
 
-        const repoUrl = 'https://github.com/aws-samples/eks-blueprints-workloads.git'
+        const repoUrl = 'https://github.com/5herlocked/vigilant-barnacle'
 
         const bootstrapRepo: blueprints.ApplicationRepository = {
             repoUrl,
-            targetRevision: 'workshop',
+            targetRevision: 'main',
         }
 
         const devBootstrapArgo = new blueprints.ArgoCDAddOn({
