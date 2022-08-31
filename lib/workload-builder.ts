@@ -1,5 +1,5 @@
 import * as cdk from 'aws-cdk-lib';
-import { BuildEnvironmentVariableType, Project, Source } from 'aws-cdk-lib/aws-codebuild';
+import { BuildEnvironmentVariableType, Project, Source, LinuxBuildImage } from 'aws-cdk-lib/aws-codebuild';
 import { Construct } from 'constructs';
 import { Repository } from 'aws-cdk-lib/aws-ecr';
 import { Role, ServicePrincipal, PolicyDocument, PolicyStatement } from 'aws-cdk-lib/aws-iam';
@@ -25,8 +25,7 @@ export class WorkloadBuilder extends cdk.Stack {
           "ecr:PutImage",
           "ecr:UploadLayerPart"
         ],
-        resources: [ecr_repo.repositoryArn],
-        principals: [new ServicePrincipal('codebuild.amazonaws.com')]
+        resources: ['*'],
       })],
     });
     
@@ -36,7 +35,7 @@ export class WorkloadBuilder extends cdk.Stack {
       description: 'Service Role to be assumed by the CodeBuild to publish to ECR',
       inlinePolicies: {
         'Custom-Policy': custom_service_policy,
-      }
+      },
     });
 
     const repo = Source.gitHub({
@@ -49,6 +48,10 @@ export class WorkloadBuilder extends cdk.Stack {
     const buildProject = new Project(this, 'CodeBuildProject', {
       projectName: repoName,
       source: repo,
+      environment: {
+        privileged: true,
+        buildImage: LinuxBuildImage.STANDARD_6_0,
+      },
       environmentVariables: {
         'AWS_DEFAULT_REGION': {
           type: BuildEnvironmentVariableType.PLAINTEXT,
