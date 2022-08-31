@@ -26,6 +26,7 @@ export class WorkloadBuilder extends cdk.Stack {
           "ecr:UploadLayerPart"
         ],
         resources: [ecr_repo.repositoryArn],
+        principals: [new ServicePrincipal('codebuild.amazonaws.com')]
       })],
     });
     
