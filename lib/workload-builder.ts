@@ -1,6 +1,7 @@
 import * as cdk from 'aws-cdk-lib';
 import { BuildEnvironmentVariableType, Project, Source } from 'aws-cdk-lib/aws-codebuild';
 import { Construct } from 'constructs';
+import { Repository } from 'aws-cdk-lib/aws-ecr';
 
 export class WorkloadBuilder extends cdk.Stack {
   constructor(scope: Construct, id: string, owner: string, branch: string, repoName: string, props?: cdk.StackProps) {
@@ -8,6 +9,10 @@ export class WorkloadBuilder extends cdk.Stack {
 
     const account = props?.env?.account!;
     const region = props?.env?.region!;
+    
+    const ecr_repo = new Repository(this, 'ECR-Repository', {
+      repositoryName: repoName,
+    })
 
     const repo = Source.gitHub({
       owner: owner,
