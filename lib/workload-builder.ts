@@ -51,24 +51,24 @@ export class WorkloadBuilder extends cdk.Stack {
       environment: {
         privileged: true,
         buildImage: LinuxBuildImage.STANDARD_6_0,
-      },
-      environmentVariables: {
-        'AWS_DEFAULT_REGION': {
-          type: BuildEnvironmentVariableType.PLAINTEXT,
-          value: region
+        environmentVariables: {
+          'AWS_DEFAULT_REGION': {
+            type: BuildEnvironmentVariableType.PLAINTEXT,
+            value: region
+          },
+          'AWS_ACCOUNT_ID': {
+            type: BuildEnvironmentVariableType.PLAINTEXT,
+            value: account
+          },
+          'IMAGE_TAG': {
+            type: BuildEnvironmentVariableType.PLAINTEXT,
+            value: 'latest'
+          },
+          'IMAGE_REPO_NAME': {
+            type: BuildEnvironmentVariableType.PLAINTEXT,
+            value: repoName,
+          }
         },
-        'AWS_ACCOUNT_ID': {
-          type: BuildEnvironmentVariableType.PLAINTEXT,
-          value: account
-        },
-        'IMAGE_TAG': {
-          type: BuildEnvironmentVariableType.PLAINTEXT,
-          value: 'latest'
-        },
-        'IMAGE_REPO_NAME': {
-          type: BuildEnvironmentVariableType.PLAINTEXT,
-          value: repoName,
-        }
       },
       role: service_role,
     });
