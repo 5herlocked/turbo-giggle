@@ -25,7 +25,7 @@ export class WorkloadBuilder extends cdk.Stack {
           "ecr:PutImage",
           "ecr:UploadLayerPart"
         ],
-        resources: ['*'],
+        resources: [ecr_repo.repositoryArn],
       })],
     });
     
