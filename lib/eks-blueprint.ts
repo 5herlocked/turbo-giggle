@@ -1,6 +1,8 @@
 import * as cdk from 'aws-cdk-lib';
 import {Construct} from 'constructs';
 import * as blueprints from '@aws-quickstart/eks-blueprints';
+import { NodegroupAmiType, CapacityType, KubernetesVersion } from 'aws-cdk-lib/aws-eks';
+import { InstanceType } from 'aws-cdk-lib/aws-ec2';
 
 export default class ClusterConstruct extends Construct {
     constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -13,10 +15,10 @@ export default class ClusterConstruct extends Construct {
             minSize: 1,
             maxSize: 2,
             desiredSize: 1,
-            instanceTypes: [new cdk.aws_ec2.InstanceType('m5a.large')],
-            amiType: cdk.aws_eks.NodegroupAmiType.AL2_X86_64,
-            nodeGroupCapacityType: cdk.aws_eks.CapacityType.ON_DEMAND,
-            version: cdk.aws_eks.KubernetesVersion.V1_21
+            instanceTypes: [new InstanceType('m5a.large')],
+            amiType: NodegroupAmiType.AL2_X86_64,
+            nodeGroupCapacityType: CapacityType.ON_DEMAND,
+            version: KubernetesVersion.V1_21
         };
 
         const clusterProvider = new blueprints.MngClusterProvider(nodeGrpProps);
