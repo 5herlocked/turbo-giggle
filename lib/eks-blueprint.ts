@@ -13,7 +13,7 @@ export default class ClusterConstruct extends Construct {
             minSize: 1,
             maxSize: 2,
             desiredSize: 1,
-            instanceTypes: [new cdk.aws_ec2.InstanceType('m5.large')],
+            instanceTypes: [new cdk.aws_ec2.InstanceType('m5a.large')],
             amiType: cdk.aws_eks.NodegroupAmiType.AL2_X86_64,
             nodeGroupCapacityType: cdk.aws_eks.CapacityType.ON_DEMAND,
             version: cdk.aws_eks.KubernetesVersion.V1_21
