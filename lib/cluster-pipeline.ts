@@ -25,7 +25,7 @@ export default class PipelineConstruct extends Construct {
         const devBootstrapArgo = new blueprints.ArgoCDAddOn({
             bootstrapRepo: {
                 ...bootstrapRepo,
-                path: 'envs/dev'
+                path: 'envs/test'
             },
         });
 
