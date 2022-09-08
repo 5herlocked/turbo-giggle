@@ -15,34 +15,6 @@ export default class PipelineConstruct extends Construct {
             .addOns(new blueprints.ClusterAutoScalerAddOn)
             .teams();
 
-        // const repoUrl = 'https://github.com/5herlocked/vigilant-barnacle'
-
-        // const bootstrapRepo: blueprints.ApplicationRepository = {
-        //     repoUrl,
-        //     targetRevision: 'main',
-        // }
-
-        // const devBootstrapArgo = new blueprints.ArgoCDAddOn({
-        //     bootstrapRepo: {
-        //         ...bootstrapRepo,
-        //         path: 'envs/test'
-        //     },
-        // });
-
-        // const testBootstrapArgo = new blueprints.ArgoCDAddOn({
-        //     bootstrapRepo: {
-        //         ...bootstrapRepo,
-        //         path: 'envs/test'
-        //     },
-        // });
-
-        // const prodBootstrapArgo = new blueprints.ArgoCDAddOn({
-        //     bootstrapRepo: {
-        //         ...bootstrapRepo,
-        //         path: 'envs/prod'
-        //     },
-        // });
-
         blueprints.CodePipelineStack.builder()
             .name('eks-blueprints-workshop-pipeline')
             .owner('5herlocked')
