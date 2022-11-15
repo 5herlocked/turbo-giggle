@@ -18,7 +18,7 @@ export default class ClusterConstruct extends Construct {
             instanceTypes: [new InstanceType('m5a.large')],
             amiType: NodegroupAmiType.AL2_X86_64,
             nodeGroupCapacityType: CapacityType.ON_DEMAND,
-            version: KubernetesVersion.V1_21
+            version: KubernetesVersion.V1_23
         };
 
         const clusterProvider = new blueprints.MngClusterProvider(nodeGrpProps);
